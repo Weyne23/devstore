@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
         protocol:'https',
         hostname: 'github.com'
       }
-    ]
+    ],
+    qualities: [100, 75]
   }
 };
 
