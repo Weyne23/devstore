@@ -4,7 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getFeaturedProducts(): Promise<Product[]> {
-  const response = await api('/products/featured')
+  const response = await api('/products/featured',{
+    next: {
+      revalidate: 30 //Aqui nos estamos cahceando a requicisão mas com um tempo limite, 
+      // aqui no caso uma hora, de cache, o usuário faz a requicisão e se o valor 
+      // não estiver em cache ele busca e valor e guarda, os outros usuários que
+      // fizerem a requicisão dentro do tempo estipulado pelo revalidate iram pegar
+      // o valor detro do cache, caso sejá feita uma requicisão após o tempo do cache
+      // o valor vai ser consultado novamente no banco de dados e é refeito o ciclo
+      // de cache.
+    }
+  })
 
   const products = await response.json();
 
@@ -19,8 +29,7 @@ export default async function Home() {
   return (
     <div className="grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6">
       <Link 
-        // href={`/product/${highlightedProduct}`}
-        href={`/`}
+        href={`/product/${highlightedProduct.slug}`}
         className="group relative col-span-6 row-span-6 rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-start"
       >
         {/* Quality é a qualidade da imagem a ser carregada, por padrão é carregada como 100 */}
@@ -54,7 +63,7 @@ export default async function Home() {
       {otherProducts.map((product) => (
         <Link 
           key={product.id}
-          href="/" 
+          href={`/product/${product.slug}`}
           // o group serve para marcar componente que quero alterados por igual 
           className="group relative col-span-3 row-span-3 rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-start"
         >

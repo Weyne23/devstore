@@ -11,6 +11,10 @@
   --font-sans: var(--font-inter);
 }
 
+@utility grid-rows-app {
+  grid-template-rows: 'min-content max-content'
+}
+
 body {
   font-family: var(--font-sans);
 }
