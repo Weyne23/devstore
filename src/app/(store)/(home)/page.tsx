@@ -1,16 +1,23 @@
 import { api } from "@/data/api";
 import { Product } from "@/data/types/product";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata =  {
+  title: 'Home'
+}
+
+
 
 async function getFeaturedProducts(): Promise<Product[]> {
   const response = await api('/products/featured',{
     next: {
-      revalidate: 30 //Aqui nos estamos cahceando a requicisão mas com um tempo limite, 
-      // aqui no caso uma hora, de cache, o usuário faz a requicisão e se o valor 
+      revalidate: 30 //Aqui nos estamos cacheando a requisição mas com um tempo limite, 
+      // aqui no caso uma hora, de cache, o usuário faz a requisição e se o valor 
       // não estiver em cache ele busca e valor e guarda, os outros usuários que
-      // fizerem a requicisão dentro do tempo estipulado pelo revalidate iram pegar
-      // o valor detro do cache, caso sejá feita uma requicisão após o tempo do cache
+      // fizerem a requisição dentro do tempo estipulado pelo revalidate iram pegar
+      // o valor dentro do cache, caso seja feita uma requisição após o tempo do cache
       // o valor vai ser consultado novamente no banco de dados e é refeito o ciclo
       // de cache.
     }

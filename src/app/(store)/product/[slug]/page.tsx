@@ -8,15 +8,40 @@ type ProductProps = {
     }
 }
 
+export async function generateMetadata({ params }: ProductProps) {
+  const { slug } = await params;
+
+  const product = await getProduct(slug);
+  return {
+    title: product.title
+  }
+}
+
+export async function generateStaticParams() {
+    const response = await api('/products/featured')
+    const products: Product[] = await response.json();
+
+    // return [
+    //     {
+    //         slug: 'moletom-never-stop-learning'
+    //     }
+    // ]
+    return products.map((product) => {
+        return {
+            slug: product.slug
+        }
+    })
+}
+
 async function getProduct(slug: string): Promise<Product> {
   const response = await api(`/products/${slug}`,{
     next: {
       revalidate: 60 * 60 //1hr
-      //Aqui nos estamos cahceando a requicisão mas com um tempo limite, 
-      // aqui no caso uma hora, de cache, o usuário faz a requicisão e se o valor 
+      //Aqui nos estamos cacheando a requisição mas com um tempo limite, 
+      // aqui no caso uma hora, de cache, o usuário faz a requisição e se o valor 
       // não estiver em cache ele busca e valor e guarda, os outros usuários que
-      // fizerem a requicisão dentro do tempo estipulado pelo revalidate iram pegar
-      // o valor detro do cache, caso sejá feita uma requicisão após o tempo do cache
+      // fizerem a requisição dentro do tempo estipulado pelo revalidate iram pegar
+      // o valor dentro do cache, caso seja feita uma requisição após o tempo do cache
       // o valor vai ser consultado novamente no banco de dados e é refeito o ciclo
       // de cache.
     }
@@ -70,16 +95,16 @@ export default async function ProductPage({ params }: ProductProps) {
                     <span className="block font-semibold">Tamanhos</span>
 
                     <div className="flex gap-2">
-                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full bordder border-zinc-700 bg-zinc-800 text-sm font-semibold">
+                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold">
                             P
                         </button>
-                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full bordder border-zinc-700 bg-zinc-800 text-sm font-semibold">
+                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold">
                             M
                         </button>
-                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full bordder border-zinc-700 bg-zinc-800 text-sm font-semibold">
+                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold">
                             G
                         </button>
-                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full bordder border-zinc-700 bg-zinc-800 text-sm font-semibold">
+                        <button type="button" className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold">
                             GG
                         </button>
                     </div>
