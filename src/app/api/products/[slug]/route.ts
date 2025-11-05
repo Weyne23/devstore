@@ -16,7 +16,6 @@ export async function GET(_: Request, { params }: ProductProps) {
     const slugRequest = z.string().parse(slug)
 
     const product = data.products.find((product) => product.slug === slugRequest)
-    console.log(product)
 
     if(!product){
         return Response.json({message: 'Product not found.'}, {status: 400})

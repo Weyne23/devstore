@@ -85,7 +85,7 @@ export default async function Home() {
             alt="moletom never stop"
           />
 
-          <div className="absolute bottom-10 right-10 flex items-center 
+          <div className="absolute bottom-10 right-10 h-12 flex items-center 
             gap-2 max-w-[280px] rounded-full border-2 border-zinc-500 
           bg-black/60 p-1 pl-5"
           >

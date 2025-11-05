@@ -11,6 +11,10 @@ export default function Header() {
                     devstore
                 </Link>
 
+                {/* 
+                    Hard Navigation: navegação nativa do browser. Zera tudo que e carrega denovo.
+                    Soft Navigation: Não recarrega tudo denovo, so o necessario. ex: usando Link
+                */}
                 <form className="flex w-[320px] items-center gap-3 rounded-full bg-zinc-900 
                 px-5 py-3 ring-zinc-700">
                     <Search className="w-5 h-5 text-zinc-500"/>
