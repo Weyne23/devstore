@@ -8,8 +8,6 @@ export const metadata: Metadata =  {
   title: 'Home'
 }
 
-
-
 async function getFeaturedProducts(): Promise<Product[]> {
   const response = await api('/products/featured',{
     next: {

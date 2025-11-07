@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image"
 import CartWidget from "./cart-widget";
 import SearchForm from "./search-form";
+import { Suspense } from "react";
 
 export default function Header() {
     return (
@@ -15,7 +16,9 @@ export default function Header() {
                     Hard Navigation: navegação nativa do browser. Zera tudo que e carrega denovo.
                     Soft Navigation: Não recarrega tudo denovo, so o necessario. ex: usando Link
                 */}
-                <SearchForm />
+                <Suspense>
+                    <SearchForm />
+                </Suspense>
             </div>
             <div className="flex items-center gap-4">
                 <CartWidget />
