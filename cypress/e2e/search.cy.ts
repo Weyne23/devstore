@@ -4,7 +4,7 @@ describe('Search products', () => {
     //Estou pegando um input com name igual a "q", com o .type eu escrevo
     //o que eu quero dentro dele, depois .parent pego o pai dele mais
     //proximo do tipo form e executo um submit
-    cy.get('input[name=q]').type('moletom').parent('form').submit()
+    cy.searchByQuery('moletom')
 
     //Aqui quero que minha URL tenha 'include' obrigatoriamente 
     //a palavra '/product'
