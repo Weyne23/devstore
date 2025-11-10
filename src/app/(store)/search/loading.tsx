@@ -3,10 +3,10 @@ import { Suspense } from "react"
 import ResultForSkeleton from "./results-for-skeleton"
 
 export default function SearchLoading() {
-    
+
     return (
         <div className="flex flex-col gap-4">
-            <Suspense>
+            <Suspense fallback={null}>
                 <ResultForSkeleton />
             </Suspense>
             <div className="grid grid-cols-3 gap-6">

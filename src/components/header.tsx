@@ -16,7 +16,7 @@ export default function Header() {
                     Hard Navigation: navegação nativa do browser. Zera tudo que e carrega denovo.
                     Soft Navigation: Não recarrega tudo denovo, so o necessario. ex: usando Link
                 */}
-                <Suspense>
+                <Suspense fallback={null}>
                     <SearchForm />
                 </Suspense>
             </div>
