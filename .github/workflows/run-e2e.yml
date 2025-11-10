@@ -3,6 +3,18 @@ name: Run E2E tests
 on: push
 
 jobs:
+  install:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          # Disable running of tests within install job
+          runTests: false
+          build: pnpm build
   cypress-run:
     runs-on: ubuntu-24.04
     steps:
@@ -30,6 +42,5 @@ jobs:
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-chi-ebon.vercel.app"
           APP_URL: "http://localhost:3000"
         with:
-          cache: 'pnpm'
-          build: pnpm build
           start: pnpm start
+          browser: chrome
