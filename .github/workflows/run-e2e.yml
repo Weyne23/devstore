@@ -26,10 +26,7 @@ jobs:
 
       - name: Approve Cypress build
         run: pnpm approve-builds cypress
-
-      - name: Approve Cypress build
-        run: pnpm dlx @pnpm/exec pnpm approve-builds cypress
-
+        
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:
