@@ -24,6 +24,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Approve Cypress build
+        run: pnpm approve-builds cypress
+
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/pnpm-lock.yaml') }}
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:
