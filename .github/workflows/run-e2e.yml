@@ -12,9 +12,8 @@ jobs:
       - name: Cypress install
         uses: cypress-io/github-action@v6
         with:
-          # Disable running of tests within install job
           runTests: false
-          build: pnpm build
+          build: npm run build
   cypress-run:
     runs-on: ubuntu-24.04
     steps:
@@ -42,5 +41,5 @@ jobs:
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-chi-ebon.vercel.app"
           APP_URL: "http://localhost:3000"
         with:
-          start: pnpm start
+          start: npm start
           browser: chrome
